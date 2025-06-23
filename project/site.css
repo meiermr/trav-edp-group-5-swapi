@@ -93,12 +93,14 @@ h1#name {
   font-size: 1.1em;
 }
 
+section#residents,
 section#planets,
 section#characters,
 section#films {
   margin: 50px;
 }
 
+section#residents,
 section#planets ul,
 section#characters ul,
 section#films ul {
@@ -106,6 +108,7 @@ section#films ul {
   padding: 0;
 }
 
+section#residents a,
 section#planets a,
 section#characters a,
 section#films a {
