@@ -2,6 +2,9 @@ let characters = [];
 let matchingCharacters = [];
 const charactersList = document.querySelector("#charactersList")
 
+let planets = []
+let films = []
+
 document.addEventListener('DOMContentLoaded', getCharacters)
 
 async function getCharacters() {

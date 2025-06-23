@@ -2,28 +2,35 @@ const baseUrl = `http://localhost:9001/api`;
 
 // Runs on page load
 addEventListener("DOMContentLoaded", () => {
-  titleH1 = document.getElementById('title')
-  episodeIdSpan = document.getElementById('episode_id')
-  directorSpan = document.getElementById('film_director')
-  producerSpan = document.getElementById('producer')
-  releaseDateSpan = document.getElementById('release_date')
-  openingCrawlSpan = document.getElementById('opening_crawl')
-  planetsUl = document.querySelector('#planets>ul')
-  charactersUl = document.querySelector('#characters>ul')
+  titleH1 = document.getElementById("title");
+  episodeIdSpan = document.getElementById("episode_id");
+  directorSpan = document.getElementById("film_director");
+  producerSpan = document.getElementById("producer");
+  releaseDateSpan = document.getElementById("release_date");
+  openingCrawlSpan = document.getElementById("opening_crawl");
+  planetsUl = document.querySelector("#planets>ul");
+  charactersUl = document.querySelector("#characters>ul");
   const sp = new URLSearchParams(window.location.search);
   const id = sp.get("id");
   getFilm(id);
 });
 
 async function getFilm(id) {
-  let film;
-  try {
-    film = await fetchFilm(id);
-    film.planets = await fetchPlanets(film);
-    film.characters = await fetchCharacters(film);
-  } catch (ex) {
-    console.error(`Error reading film ${id} data.`, ex.message);
-  }
+
+  let film = localStorage.getItem("film_id");
+  console.log(film)
+  // console.log(JSON.parse(film));
+  if (film == undefined) {
+    try {
+      console.log("fetching film");
+      film = await fetchFilm(id);
+      film.planets = await fetchPlanets(film);
+      film.characters = await fetchCharacters(film);
+    } catch (ex) {
+      console.error(`Error reading film ${id} data.`, ex.message);
+    }
+    localStorage.setItem("film_id", JSON.stringify(film));
+  } 
   renderFilm(film);
 }
 
